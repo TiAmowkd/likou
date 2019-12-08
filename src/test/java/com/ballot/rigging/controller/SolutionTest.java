@@ -51,4 +51,19 @@ public class SolutionTest {
         int result = solution.reverse(a);
         System.out.println(result);
     }
+
+    @Test
+    public void findMedianSortedArrays() {
+//        int[] nums1 = new int[]{1, 3};
+//        int[] nums2 = new int[]{2};
+        int[] nums1 = new int[]{1, 2};
+        int[] nums2 = new int[]{3, 4};
+        double result = solution.findMedianSortedArrays2(nums1,nums2);
+//        double result = solution.findMedianSortedArrays(nums1,nums2);
+        System.out.println(result);
+
+        Integer integer = 2;
+        integer = 3;
+        System.out.println(integer);
+    }
 }
