@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Component
 public class SolutionTest {
     @Autowired
-    private Solution solution;
+    private SolutionController solutionController;
 
     @Test
     public void addTwoNumbers() {
@@ -27,7 +27,7 @@ public class SolutionTest {
         l3.next = l4;
         l2.next = l5;
         l5.next = l6;
-        ListNode result = solution.addTwoNumbers(l1, l2);
+        ListNode result = solutionController.addTwoNumbers(l1, l2);
 //        ListNode result2 = solution.addTwoNumbers2(l1, l2);
         while (result != null) {
             System.out.println(result.val);
@@ -39,16 +39,16 @@ public class SolutionTest {
     public void lengthOfLongestSubstring() {
         //abcbbcbb abcaaccb
         String str = "abcaabhgcb";
-        int result = solution.lengthOfLongestSubstring(str);
+        int result = solutionController.lengthOfLongestSubstring(str);
         System.out.println(result);
-        int result2 = solution.lengthOfLongestSubstring2(str);
+        int result2 = solutionController.lengthOfLongestSubstring2(str);
         System.out.println(result2);
     }
 
     @Test
     public void reverse() {
         int a = -123;
-        int result = solution.reverse(a);
+        int result = solutionController.reverse(a);
         System.out.println(result);
     }
 }

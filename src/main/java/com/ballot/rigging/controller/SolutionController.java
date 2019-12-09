@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-public class Solution {
+public class SolutionController {
 
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -44,41 +44,6 @@ public class Solution {
         return dummyHead.next;
     }
 
-   /* public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
-        ListNode dummyHead = new ListNode(0);
-        ListNode p = l1, q = l2, curr = dummyHead;
-        String sl1 = new String();
-        String sl2 = new String();
-        while(p != null ){
-            sl1+= p.val;
-            p = p.next;
-        }
-        char[] charArray1 = sl1.toCharArray();
-        String resultString1 = "";
-        for (int i=charArray1.length-1; i>=0; i--){
-            resultString1 += charArray1[i];
-        }
-        while(q != null ){
-            sl2+= q.val;
-            q = q.next;
-        }
-        char[] charArray2 = sl2.toCharArray();
-        String resultString2 = "";
-        for (int i=charArray2.length-1; i>=0; i--){
-            resultString2 += charArray2[i];
-        }
-        int sum =  Integer.parseInt(resultString1) + Integer.parseInt(resultString2);
-        if(sum == 0){
-            curr.next = new ListNode(0);
-        }else {
-            while(sum != 0){
-                curr.next = new ListNode(sum%10);
-                sum = sum/10;
-                curr = curr.next;
-            }
-        }
-        return dummyHead.next;
-    }*/
 
     public int lengthOfLongestSubstring(String s) {
         int n = s.length();
