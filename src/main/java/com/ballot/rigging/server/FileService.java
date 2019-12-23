@@ -15,7 +15,7 @@ public class FileService {
      * @param url
      * @param fileConsumer
      */
-    public void fileHandle(String url, FileConsumer fileConsumer)
+    public void fileHandleService(String url, FileConsumer fileConsumer)
             throws IOException {
 
         // 创建文件读取流

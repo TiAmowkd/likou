@@ -16,9 +16,13 @@ class FileServiceTest {
         FileService fileService = new FileService();
 
         // TODO 此处替换为本地文件的地址全路径
-        String filePath = " ";
+        String filePath = "F:/SignTemplate.docx";
 
         // 通过lambda表达式，打印文件内容
-        fileService.fileHandle(filePath, System.out::println);
+        fileService.fileHandleService(filePath, System.out::println);
+
+       /* String a = "aaddddd";*/
+//        Consumer<String> consumer = String::length;
+
     }
 }

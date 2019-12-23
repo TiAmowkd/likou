@@ -11,5 +11,4 @@ public interface FileConsumer {
      * @param fileContent - 文件内容字符串
      */
     void fileHandler(String fileContent);
-
 }
