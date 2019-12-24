@@ -163,7 +163,7 @@ public class StreamOperator {
     }
 
     /**
-     * allMatch使用：终端操作，短路操作。所有元素匹配，返回true
+     * allMatch使用：终端操作，短路操作。所有元素匹配，返回true,有一个不满足返回false
      */
     @Test
     public void allMatchTest() {
