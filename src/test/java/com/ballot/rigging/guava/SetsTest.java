@@ -16,16 +16,16 @@ public class SetsTest {
     /**
      * Sets工具类的常用方法
      * 并集 / 交集 / 差集 / 分解集合中的所有子集 / 求两个集合的笛卡尔积
-     *
+     * <p>
      * Lists工具类的常用方式
      * 反转 / 拆分
      */
 
     private static final Set set1 =
-            Sets.newHashSet(1, 2);
+            Sets.newHashSet(1, 2, 4, 5);
 
     private static final Set set2 =
-            Sets.newHashSet(4);
+            Sets.newHashSet(4, 9);
 
     // 并集
     @Test
@@ -56,7 +56,7 @@ public class SetsTest {
         System.out.println(set);
     }
 
-    // 拆分所有子集合
+    // 拆分所有子集合,返回该集合的所有子集合
     @Test
     public void powerSet() {
         Set<Set<Integer>> powerSet = Sets.powerSet(set1);

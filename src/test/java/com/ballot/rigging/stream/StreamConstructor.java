@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -63,4 +64,8 @@ public class StreamConstructor {
 
     }
 
+
+    /**
+     * 通过集合创建流Collection.stream
+     */
 }

@@ -1,5 +1,7 @@
 package com.ballot.rigging.lambda;
 
+import org.junit.Test;
+
 import java.util.function.Consumer;
 
 /**
@@ -11,12 +13,15 @@ public class MethodReference {
      * (args) -> ClassName.staticMethod(args);
      * ClassName::staticMethod;
      */
+    @Test
     public void test1() {
         Consumer<String> consumer1
                 = (String number) -> Integer.parseInt(number);
 
         Consumer<String> consumer2
                 = Integer::parseInt;
+
+
     }
 
     /**
