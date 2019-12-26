@@ -2,6 +2,7 @@ package com.ballot.rigging.guava;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -50,9 +51,10 @@ public class OptionalTest {
         });
     }
 
-    public static void stream(List<String> list) {
+    @Test
+    public  void stream() {
 //        list.stream().forEach(System.out::println);
-
+        List<String> list = new ArrayList<>();
 
         Optional.ofNullable(list)
                 .map(List::stream)
@@ -61,8 +63,5 @@ public class OptionalTest {
 
     }
 
-    public static void main(String[] args) {
-        stream(null);
-    }
 
 }

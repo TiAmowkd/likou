@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class ImmutableTest {
 
-    public void test(List<Integer> list) {
+    private void test(List<Integer> list) {
         list.remove(0);
     }
 

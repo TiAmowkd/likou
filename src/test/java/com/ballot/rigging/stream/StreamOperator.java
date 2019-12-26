@@ -113,6 +113,7 @@ public class StreamOperator {
     public void distinctTest() {
         list.stream()
                 .map(sku -> sku.getSkuCategory())
+//                .filter(d)
 
                 // distinct
                 .distinct()
@@ -145,6 +146,7 @@ public class StreamOperator {
 
     /**
      * limit使用：截断前N条记录。有状态操作
+     * 类似分页
      */
     @Test
     public void limitTest() {
@@ -225,6 +227,7 @@ public class StreamOperator {
 
     /**
      * 找任意一个
+     * 在并发时会不同，顺序执行则为第一条
      */
     @Test
     public void findAnyTest() {

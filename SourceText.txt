@@ -1,13 +1,13 @@
-package com.ballot.rigging.guava;
+package com.imooc.zhangxiaoxi.guava;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.ByteStreams;
 import com.google.common.io.CharSink;
 import com.google.common.io.CharSource;
 import com.google.common.io.Files;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 演示如何使用流(Source)与汇(Sink)来对文件进行常用操作
@@ -21,10 +21,10 @@ public class IOTest {
          * 创建对应的Source和Sink
          */
         CharSource charSource = Files.asCharSource(
-                new File("SourceText.txt"),
+                new File(""),
                 Charsets.UTF_8);
         CharSink charSink = Files.asCharSink(
-                new File("TargetText.txt"),
+                new File(""),
                 Charsets.UTF_8);
 
         /**
@@ -32,12 +32,7 @@ public class IOTest {
          */
         charSource.copyTo(charSink);
 
+
     }
 
-    @Test
-    public void copyWordFile() throws IOException {
-        InputStream inputStream = new FileInputStream(new File("lib/source.docx"));
-        OutputStream outputStream = new FileOutputStream("lib/sink.docx");
-        ByteStreams.copy(inputStream,outputStream);
-    }
 }
