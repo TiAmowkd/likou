@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -90,7 +91,8 @@ public class SetsTest {
     // 反转
     @Test
     public void reverse() {
-        List<Integer> list = Lists.newLinkedList();
+//        List<Integer> list = Lists.newLinkedList();
+        List<Integer> list = new LinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);
