@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 自定义手机号约束注解
  */
 @Documented
-// 注解的作用目标
+// 注解的作用目标  FIELD属性
 @Target({ElementType.FIELD})
 // 注解的保留策略
 @Retention(RetentionPolicy.RUNTIME)

@@ -21,7 +21,7 @@ public class UserInfo {
     // 注册场景
     public interface RegisterGroup {}
 
-    // 组排序场景
+    // 组排序场景 （先校验LoginGroup，再校验RegisterGroup）没有明确定义的为Default
     @GroupSequence({
             LoginGroup.class,
             RegisterGroup.class,

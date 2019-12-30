@@ -66,7 +66,12 @@ public class ValidationTest {
      */
     @After
     public void print() {
-        set.forEach(item -> {
+       /* set.forEach(item -> {
+            // 输出验证错误信息
+            System.out.println(item.getMessage());
+        });*/
+
+        otherSet.forEach(item -> {
             // 输出验证错误信息
             System.out.println(item.getMessage());
         });
