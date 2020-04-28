@@ -107,23 +107,29 @@ public class OptionalLevelTest {
 
     @Test
     public void whenMap_BookList() {
+        Book book = new Book();
+        book.setName("aa");
         List<Book> list = new ArrayList<>();
-        list.add(new Book("无人机",4999));
-        list.add(new Book("eeeee",999));
-        list.add(new Book("aede机",495499));
-        list.add(new Book("eefr机",4899));
+        list.add(new Book("无人机", 4999));
+        list.add(new Book("eeeee", 999));
+        list.add(new Book("aede机", 495499));
+        list.add(new Book("eefr机", 4899));
+        list.add(book);
         Optional<List<String>> listStringOptional = Optional.ofNullable(list).
-                map(u->u.stream().map(x->x.getName()).collect(Collectors.toList()));
+                map(u -> u.stream().map(x -> x.getName()).collect(Collectors.toList()));
         List<String> strings = listStringOptional.get();
         System.out.println(strings);
 
         //jdk9 Optional.stream()
         // 注意idea编译环境也要切换为9
         // setting ->Build、Execution、Deployment -> Compiler -> Java Compiler
-        listStringOptional.stream().forEach(x->x.stream().forEach(u-> System.out.println(u)));
+//        listStringOptional.stream().forEach(x->x.stream().forEach(u-> System.out.println(u)));
 
     }
 
+    /**
+     * Optional 使用stream操作
+     */
     @Test
     public void Optional_ListString() {
         List<String> list = new ArrayList<>();
@@ -140,6 +146,22 @@ public class OptionalLevelTest {
         optional2.stream()
                 .flatMap(x -> x.stream())//optional 扁平化
                 .forEach(System.out::println);
+    }
+
+    /**
+     * 用Optional处理List为null，不报错
+     */
+    @Test
+    public void Optional_NullList() {
+        List<String> list = null;
+
+        Optional<List<String>> optional = Optional.ofNullable(list);
+        optional.stream()//optional 可以转为stream
+                .forEachOrdered(x -> x.stream().forEach(y -> System.out.println(y)));
+        optional.stream()
+                .flatMap(x -> x.stream())//optional 扁平化
+                .forEach(System.out::println);
+
     }
 
 
