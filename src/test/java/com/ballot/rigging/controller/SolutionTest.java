@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Component
@@ -16,41 +20,13 @@ public class SolutionTest {
     private SolutionController solutionController;
 
     @Test
-    public void addTwoNumbers() {
-        ListNode l1 = new ListNode(2);
-        ListNode l2 = new ListNode(5);
-        ListNode l3 = new ListNode(4);
-        ListNode l4 = new ListNode(3);
-        ListNode l5 = new ListNode(6);
-        ListNode l6 = new ListNode(4);
-        l1.next = l3;
-        l3.next = l4;
-        l2.next = l5;
-        l5.next = l6;
-        ListNode result = solutionController.addTwoNumbers(l1, l2);
-//        ListNode result2 = solution.addTwoNumbers2(l1, l2);
-        while (result != null) {
-            System.out.println(result.val);
-            result = result.next;
-        }
-    }
-
-    @Test
     public void lengthOfLongestSubstring() {
         //abcbbcbb abcaaccb
-        String str = "abcaabhgcb";
+        String str = "dafageggafda";
         int result = solutionController.lengthOfLongestSubstring(str);
         System.out.println(result);
-        int result2 = solutionController.lengthOfLongestSubstring2(str);
-        System.out.println(result2);
     }
 
-    @Test
-    public void reverse() {
-        int a = -123;
-        int result = solutionController.reverse(a);
-        System.out.println(result);
-    }
 
     @Test
     public void findMedianSortedArrays() {
@@ -58,12 +34,149 @@ public class SolutionTest {
 //        int[] nums2 = new int[]{2};
         int[] nums1 = new int[]{1, 2};
         int[] nums2 = new int[]{3, 4};
-        double result = solutionController.findMedianSortedArrays2(nums1,nums2);
+        double result = solutionController.findMedianSortedArrays2(nums1, nums2);
 //        double result = solution.findMedianSortedArrays(nums1,nums2);
         System.out.println(result);
 
         Integer integer = 2;
         integer = 3;
         System.out.println(integer);
+    }
+
+    @Test
+    public void testCpuNumber() {
+        // 获取cpu的核数
+        System.out.println(Runtime.getRuntime().availableProcessors());
+    }
+
+    @Test
+    public void testThread() {
+        Data2 data = new Data2();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "A").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "B").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "C").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "D").start();
+    }
+
+    @Test
+    public void testThread2() {
+        Data2 data = new Data2();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "A").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "B").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "C").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "D").start();
+    }
+
+
+}
+
+// 判断等待，业务，通知
+class Data2 { // 数字 资源类
+    private int number = 0;
+    Lock lock = new ReentrantLock();
+    Condition condition = lock.newCondition();
+
+    //condition.await(); // 等待
+    // condition.signalAll(); // 唤醒全部
+    // +1
+    public void increment() throws InterruptedException {
+        lock.lock();
+        try {
+            // 业务代码
+            while (number != 0) { //0
+                // 等待
+                condition.await();
+            }
+            number++;
+            System.out.println(Thread.currentThread().getName() + "=>" + number);
+            // 通知其他线程，我+1完毕了
+            condition.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    } //-1
+
+    public synchronized void decrement() throws InterruptedException {
+        lock.lock();
+        try {
+            while (number == 0) { // 1
+                // 等待
+                condition.await();
+            }
+            number--;
+            System.out.println(Thread.currentThread().getName() + "=>" + number);
+            // 通知其他线程，我-1完毕了
+            condition.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
     }
 }
