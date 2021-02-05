@@ -17,4 +17,10 @@ public class SolutionControllerTest extends RiggingApplicationTests {
         System.out.println(medianSortedArrays3);
     }
 
+    @Test
+    public void ff(){
+        System.out.println(1L + Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+
+    }
 }

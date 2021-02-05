@@ -37,13 +37,6 @@ public class SolutionController {
         // 循环添加数组内容
         System.arraycopy(nums1, 0, array, 0, nums1.length);
         System.arraycopy(nums2, 0, array, nums1.length, nums2.length);
-        /*for (int i = 0; i < array.length; i++) {
-            if (i < nums1.length) {
-                array[i] = nums1[i];
-            } else {
-                array[i] = nums2[i - nums1.length];
-            }
-        }*/
         Arrays.sort(array);
         if ((array.length & 1) == 1) {
             flag = array.length / 2;
@@ -59,12 +52,7 @@ public class SolutionController {
         int m = nums1.length;
         int n = nums2.length;
         if (m > n) { // to ensure m<=n
-            int[] temp = nums1;
-            nums1 = nums2;
-            nums2 = temp;
-            int tmp = m;
-            m = n;
-            n = tmp;
+            return findMedianSortedArrays2(nums2, nums1);
         }
         int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
         while (iMin <= iMax) {
@@ -134,7 +122,6 @@ public class SolutionController {
         int length1 = nums1.length, length2 = nums2.length;
         int index1 = 0, index2 = 0;
         int kthElement = 0;
-
         while (true) {
             // 边界情况
             if (index1 == length1) {
@@ -146,7 +133,6 @@ public class SolutionController {
             if (k == 1) {
                 return Math.min(nums1[index1], nums2[index2]);
             }
-
             // 正常情况
             int half = k / 2;
             int newIndex1 = Math.min(index1 + half, length1) - 1;
