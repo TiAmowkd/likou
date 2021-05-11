@@ -5,8 +5,6 @@ import com.ballot.rigging.pojo.ListNode;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 public class LeetCode20_30Test extends RiggingApplicationTests {
     @Autowired
     private LeetCode20_30 leetCode;
@@ -58,13 +56,19 @@ public class LeetCode20_30Test extends RiggingApplicationTests {
 
     @Test
     public void strStr() {
-        leetCode.strStr("hello","ll");
+        leetCode.strStr("hello", "ll");
     }
 
     @Test
     public void removeElement() {
-        int[] nums  = new int[]{1,1,2,3,4,6};
+        int[] nums = new int[]{1, 1, 2, 3, 4, 6};
         int i = leetCode.removeElement(nums, 1);
         System.out.println(i);
+    }
+
+    @Test
+    public void removeDuplicates() {
+        int[] ints = new int[]{1, 1, 2};
+        leetCode.removeDuplicates2(ints);
     }
 }

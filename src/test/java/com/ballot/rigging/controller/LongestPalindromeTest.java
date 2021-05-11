@@ -3,7 +3,6 @@ package com.ballot.rigging.controller;
 import com.ballot.rigging.RiggingApplicationTests;
 import com.ballot.rigging.pojo.ListNode;
 import com.ballot.rigging.pojo.ListNode2;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -141,7 +140,7 @@ public class LongestPalindromeTest extends RiggingApplicationTests {
 
     @Test
     public void threeSumClosest() {
-        int i = longestPalindrome.threeSumClosest(new int[]{1,1,-1,-1,3}, -1);
+        int i = longestPalindrome.threeSumClosest(new int[]{1, 1, -1, -1, 3}, -1);
         System.out.println(i);
     }
 
@@ -170,5 +169,12 @@ public class LongestPalindromeTest extends RiggingApplicationTests {
             System.out.println(result.val);
             result = result.next;
         }
+    }
+
+    @Test
+    public void findMedianSortedArrays() {
+        int[] a = new int[]{1};
+        int[] b = new int[]{};
+        longestPalindrome.findMedianSortedArrays(a, b);
     }
 }

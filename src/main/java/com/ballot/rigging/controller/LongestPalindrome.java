@@ -3,7 +3,6 @@ package com.ballot.rigging.controller;
 import com.ballot.rigging.pojo.Automaton;
 import com.ballot.rigging.pojo.ListNode;
 import com.ballot.rigging.pojo.ListNode2;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -92,6 +91,46 @@ public class LongestPalindrome {
         return max;
     }
 
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int allLength = nums1.length + nums2.length;
+        if (allLength % 2 == 1) {
+            //奇数
+            return findMinNumber(nums1, nums2, allLength / 2 + 1);
+        } else {
+            //偶数
+            return (findMinNumber(nums1, nums2, allLength / 2) + findMinNumber(nums1, nums2, allLength / 2 + 1)) / 2.0;
+        }
+    }
+
+    public double findMinNumber(int[] nums1, int[] nums2, int key) {
+        int length1 = nums1.length, length2 = nums2.length;
+        int index1 = 0, index2 = 0;
+
+        while (true) {
+            if (length1 <= index1) {
+                return nums2[index2 + key - 1];
+            }
+            if (length2 <= index2) {
+                return nums1[index1 + key - 1];
+            }
+            if (key == 1) {
+                return Math.min(nums1[index1], nums2[index2]);
+            }
+
+            int point = key / 2;
+            int newIndex1 = Math.min(index1 + point, length1) - 1;
+            int newIndex2 = Math.min(index2 + point, length2) - 1;
+            if (nums1[newIndex1] >= nums2[newIndex2]) {
+                key = key - (newIndex2 - index2 + 1);
+                index2 = newIndex2 + 1;
+            }
+            if (nums1[newIndex1] < nums2[newIndex2]) {
+                key = key - (newIndex1 - index1 + 1);
+                index1 = newIndex1 + 1;
+            }
+        }
+    }
+
     /**
      * 动态规划法 最长回文子串
      *
@@ -128,26 +167,24 @@ public class LongestPalindrome {
      * @return
      */
     public String longestPalindrome2(String s) {
-        if (s == null || s.length() < 1) {
-            return "";
-        }
+        int length = s.length();
         int start = 0, end = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int len1 = expandAroundCenter(s, i, i);
-            int len2 = expandAroundCenter(s, i, i + 1);
-            int len = Math.max(len1, len2);
-            if (len > end - start) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
+        for (int i = 0; i < length; i++) {
+            int palindromeSize1 = expandAroundCenter(s, i, i);
+            int palindromeSize2 = expandAroundCenter(s, i, i + 1);
+            int max = Math.max(palindromeSize1, palindromeSize2);
+            if (end - start < max) {
+                start = i - (max - 1) / 2;
+                end = i + max / 2;
             }
         }
         return s.substring(start, end + 1);
     }
 
     public int expandAroundCenter(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            --left;
-            ++right;
+        while (left > 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
         }
         return right - left - 1;
     }
@@ -350,6 +387,21 @@ public class LongestPalindrome {
             return true;
         }
         return s.charAt(i - 1) == p.charAt(j - 1);
+    }
+
+    public int maxArea(int[] height) {
+        int start = 0, end = height.length - 1;
+        int max = 0;
+        while (start < end) {
+            int sum = Math.min(height[start], height[end]) * (end - start);
+            max = Math.max(max,sum);
+            if (height[start] > height[end]) {
+                end--;
+            } else {
+                start++;
+            }
+        }
+        return max;
     }
 
     /**
@@ -559,7 +611,6 @@ public class LongestPalindrome {
                     }
                 }
             }
-
         }
         return result;
     }
@@ -591,17 +642,17 @@ public class LongestPalindrome {
     }
 
     public void backtrack(List<String> combinations, Map<Character, String> phoneMap,
-                          String digits, int index, StringBuffer combination) {
+                          String digits, int index, StringBuffer stringBuffer) {
         if (index == digits.length()) {
-            combinations.add(combination.toString());
+            combinations.add(stringBuffer.toString());
         } else {
             char digit = digits.charAt(index);
             String letters = phoneMap.get(digit);
             for (char ch : letters.toCharArray()) {
-                combination.append(ch);
-                backtrack(combinations, phoneMap, digits, index + 1, combination);
+                stringBuffer.append(ch);
+                backtrack(combinations, phoneMap, digits, index + 1, stringBuffer);
                 // 递归结束 清除字符 或者回到上一次递归继续下一个字母拼接
-                combination.deleteCharAt(index);
+                stringBuffer.deleteCharAt(index);
             }
         }
     }

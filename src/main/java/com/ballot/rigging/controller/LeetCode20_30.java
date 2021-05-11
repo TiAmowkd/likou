@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author: wkd
@@ -265,6 +267,14 @@ public class LeetCode20_30 {
         return i + 1;
     }
 
+    public int removeDuplicates2(int[] nums){
+        nums = Arrays.stream(nums).distinct().toArray();
+        for(int a : nums){
+            System.out.println(a);
+        }
+        return nums.length;
+    }
+
     public int strStr(String haystack, String needle) {
         if (StringUtils.isEmpty(needle)) {
             return 0;
@@ -303,6 +313,7 @@ public class LeetCode20_30 {
 
     /**
      * 两数相除
+     *
      * @param dividend
      * @param divisor
      * @return
@@ -319,7 +330,9 @@ public class LeetCode20_30 {
             // 开始循环比较 找到 n*divisor<dividend<(n+1)*divisor
             while (dividend <= (tempDivisor << 1)) {
                 //如果tempDivisor 小于最小值的一般 则会溢出-
-                if (tempDivisor <= (Integer.MIN_VALUE >> 1)) {break;}
+                if (tempDivisor <= (Integer.MIN_VALUE >> 1)) {
+                    break;
+                }
                 tempResult = tempResult << 1;
                 tempDivisor = tempDivisor << 1;
             }

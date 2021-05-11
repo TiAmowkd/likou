@@ -1,9 +1,10 @@
 package com.ballot.rigging.controller;
 
-import com.ballot.rigging.pojo.ListNode;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 public class SolutionController {
